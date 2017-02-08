@@ -86,20 +86,6 @@ const actually_compare_tags = (pt, qt) => {
 	}
 }
 
-const any = xs => {
-	for (let i = 0; i < xs.length; i++) {
-		if (xs[i]) return true
-	}
-	return false
-}
-
-const all = xs => {
-	for (let i = 0; i < xs.length; i++) {
-		if (!xs[i]) return false
-	}
-	return true
-}
-
 const lt = x => x < 0
 const lte = x => x <= 0
 const gt = x => x > 0
@@ -119,13 +105,15 @@ const satisfies_comparator = (p, q) =>
 		? false
 		: cmp_map[q.comparison](compare(p.major, p.minor, p.patch, p.tags, q.major, q.minor, q.patch, q.tags))
 
-const satisfies_range = (p, range) => all(range.map(
-	c => satisfies_comparator(p, c)
-))
+const satisfies_range = (p, range) => {
+	for (let i = 0; i < range.length; i++) if (!satisfies_comparator(p, range[i])) return false
+	return true
+}
 
-const satisfies_set = (p, set) => any(set.map(
-	r => satisfies_range(p, r)
-))
+const satisfies_set = (p, set) => {
+	for (let i = 0; i < set.length; i++) if (satisfies_range(p, set[i])) return true
+	return false
+}
 
 const satisfies = (version, set) => satisfies_set(parse_version(version), parse_set(set))
 
