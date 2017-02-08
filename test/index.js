@@ -1,4 +1,4 @@
-const { satisfies } = require('..')
+const { satisfies } = require('../lib/svs')
 const { expect } = require('chai')
 
 describe('svs', () => {

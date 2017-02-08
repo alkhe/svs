@@ -2,7 +2,7 @@
   "name": "svs",
   "version": "0.1.0",
   "description": "Optimized semver.satisfies.",
-  "main": "index.js",
+  "main": "./lib/svs.js",
   "scripts": {
     "test": "mocha"
   },
@@ -25,6 +25,13 @@
   "homepage": "https://github.com/edge/svs#readme",
   "devDependencies": {
     "chai": "^3.5.0",
-    "mocha": "^3.2.0"
+    "mocha": "^3.2.0",
+    "rollup": "^0.41.4",
+    "rollup-plugin-uglify": "^1.0.1",
+    "uglify-js": "https://github.com/mishoo/UglifyJS2#harmony"
+  },
+  "dependencies": {
+    "global": "^4.3.1",
+    "yarn": "^0.19.1"
   }
 }

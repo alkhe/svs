@@ -117,7 +117,7 @@ const satisfies_set = (p, set) => {
 
 const satisfies = (version, set) => satisfies_set(parse_version(version), parse_set(set))
 
-module.exports = {
+export {
 	satisfies,
 	satisfies_set,
 	satisfies_range,
