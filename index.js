@@ -124,5 +124,6 @@ export {
 	satisfies_comparator,
 	parse_set,
 	parse_range,
-	parse_comparator
+	parse_comparator,
+	parse_version
 }
