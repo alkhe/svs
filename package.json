@@ -30,8 +30,5 @@
     "rollup-plugin-uglify": "^1.0.1",
     "uglify-js": "https://github.com/mishoo/UglifyJS2#harmony"
   },
-  "dependencies": {
-    "global": "^4.3.1",
-    "yarn": "^0.19.1"
-  }
+  "dependencies": {}
 }
