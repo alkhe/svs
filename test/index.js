@@ -38,4 +38,13 @@ describe('svs', () => {
 		expect(satisfies('1.0.0-beta', '>0.5.0||>1.0.0-alpha')).to.be.true
 		expect(satisfies('4.1.1', '>=1.0.0 <2.0.0||>=4.0.0')).to.be.true
 	})
+
+	it('accepts star and empty ranges', () => {
+		expect(satisfies('1.0.0', '')).to.be.true
+		expect(satisfies('5.1.1', '*')).to.be.true
+		expect(satisfies('0.4.0', '||||||')).to.be.true
+		expect(satisfies('1.0.0-asd', '')).to.be.false
+		expect(satisfies('0.1.0-asd', '*')).to.be.false
+		expect(satisfies('2.2.2-asd', '||')).to.be.false
+	})
 })

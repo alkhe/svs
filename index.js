@@ -1,8 +1,10 @@
+const STAR_RANGE = {}
+
 function parse_version(v) {
 	const dash_index = v.indexOf('-')
 	const [ver, tags] = dash_index === -1
 		? [v, []]
-		: [v.slice(0, dash_index), v.slice(dash_index + 1).split('.')]
+		: [v.substring(0, dash_index), v.substring(dash_index + 1).split('.')]
 
 	const [major, minor, patch] = ver.split('.')
 
@@ -12,16 +14,18 @@ function parse_version(v) {
 // Comparator :: { comparison, major, minor, patch, tags }
 function parse_comparator(range) {
 	const num_index = range.match(/\d/).index
-	const comparison = range.slice(0, num_index)
+	const comparison = range.substring(0, num_index)
 
-	const { major, minor, patch, tags } = parse_version(range.slice(num_index))
+	const { major, minor, patch, tags } = parse_version(range.substring(num_index))
 
 	return { comparison, major, minor, patch, tags }
 }
 
 // Range :: [Comparator]
 function parse_range(range) {
-	return range.split(' ').map(parse_comparator)
+	return (range === '' || range === '*')
+		? STAR_RANGE
+		: range.split(' ').map(parse_comparator)
 }
 
 // Set :: [Range]
@@ -106,6 +110,8 @@ const satisfies_comparator = (p, q) =>
 		: cmp_map[q.comparison](compare(p.major, p.minor, p.patch, p.tags, q.major, q.minor, q.patch, q.tags))
 
 const satisfies_range = (p, range) => {
+	if (range === STAR_RANGE) return p.tags.length === 0
+
 	for (let i = 0; i < range.length; i++) if (!satisfies_comparator(p, range[i])) return false
 	return true
 }

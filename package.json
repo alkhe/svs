@@ -28,6 +28,7 @@
     "mocha": "^3.2.0",
     "rollup": "^0.41.4",
     "rollup-plugin-uglify": "^1.0.1",
+    "semver": "^5.3.0",
     "uglify-js": "https://github.com/mishoo/UglifyJS2#harmony"
   },
   "dependencies": {}
